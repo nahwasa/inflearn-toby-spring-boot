@@ -23,6 +23,10 @@ public class TobySpringBootApplication {
     }
 
     public static void main(String[] args) {
+        run(TobySpringBootApplication.class, args);
+    }
+
+    private static void run(Class<?> applicationClass, String... args) {
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext() {
             @Override
             protected void onRefresh() {
@@ -38,10 +42,8 @@ public class TobySpringBootApplication {
                 webServer.start();
             }
         };
-        applicationContext.register(TobySpringBootApplication.class);
+        applicationContext.register(applicationClass);
         applicationContext.refresh();
-
-
     }
 
 }
