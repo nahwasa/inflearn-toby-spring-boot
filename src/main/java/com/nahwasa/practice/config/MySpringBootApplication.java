@@ -1,5 +1,6 @@
-package com.nahwasa.practice.tobyspringboot;
+package com.nahwasa.practice.config;
 
+import com.nahwasa.practice.config.EnableMyAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,5 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Configuration
 @ComponentScan
+@EnableMyAutoConfiguration
 public @interface MySpringBootApplication {
 }

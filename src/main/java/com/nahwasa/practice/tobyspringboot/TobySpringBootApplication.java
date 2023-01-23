@@ -1,5 +1,6 @@
 package com.nahwasa.practice.tobyspringboot;
 
+import com.nahwasa.practice.config.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootApplication
