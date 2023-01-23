@@ -20,6 +20,8 @@ public class TobySpringBootApplication {
         ServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory();
         WebServer webServer = tomcatServletWebServerFactory.getWebServer(servletContext -> {
             servletContext.addServlet("frontcontroller", new HttpServlet() {
+                HelloController helloController = new HelloController();
+
                 @Override
                 protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
                     // 인증, 보안, 다국어, 공통 기능 등 처리
@@ -27,9 +29,11 @@ public class TobySpringBootApplication {
                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                         String name = req.getParameter("name");
 
+                        String ret = helloController.hello(name);   // binding
+
                         resp.setStatus(HttpStatus.OK.value());
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                        resp.getWriter().println("Hello " + name);
+                        resp.getWriter().println(ret);
                     } else if (req.getRequestURI().equals("/user")) {
                         //
                     } else {
