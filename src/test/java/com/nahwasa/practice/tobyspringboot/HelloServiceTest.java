@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HelloServiceTest {
-    @Test
+    @FastUnitTest
     void simpleHelloService() {
         SimpleHelloService helloService = new SimpleHelloService();
 
@@ -14,7 +14,7 @@ class HelloServiceTest {
         assertThat(ret).isEqualTo("Hello Test");
     }
 
-    @Test
+    @UnitTest
     void helloDecorator() {
         HelloDecorator helloService = new HelloDecorator(name -> name);
 
