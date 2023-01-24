@@ -1,1 +1,1 @@
-GET http://localhost:8081/app/hello?name=Spring
+GET http://localhost:8081/app/hello?name=nahwasa
