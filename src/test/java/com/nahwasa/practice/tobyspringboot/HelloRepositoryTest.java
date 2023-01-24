@@ -1,21 +1,22 @@
 package com.nahwasa.practice.tobyspringboot;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@TobySpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@Transactional
 public class HelloRepositoryTest {
     @Autowired JdbcTemplate jdbcTemplate;
     @Autowired HelloRepository helloRepository;
 
     @Test
     void findHelloFailed() {
-        assertThat(helloRepository.findHello("nahwasa")).isNull();
+        assertThat(helloRepository.findHello("Toby")).isNull();
     }
 
     @Test
