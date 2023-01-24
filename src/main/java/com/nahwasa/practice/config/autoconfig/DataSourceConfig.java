@@ -5,8 +5,12 @@ import com.nahwasa.practice.config.EnableMyConfigurationProperties;
 import com.nahwasa.practice.config.MyAutoConfiguration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.jdbc.support.JdbcTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.Driver;
@@ -14,6 +18,7 @@ import java.sql.Driver;
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.springframework.jdbc.core.JdbcOperations") // 그래들에 'org.springframework.boot:spring-jdbc' 넣어줘야 뜸.
 @EnableMyConfigurationProperties(MyDataSourceProperties.class)
+@EnableTransactionManagement
 public class DataSourceConfig {
     @Bean
     @ConditionalMyOnClass("com.zaxxer.hikari.HikariDataSource")
@@ -40,6 +45,20 @@ public class DataSourceConfig {
         dataSource.setPassword(properties.getPassword());
 
         return dataSource;
+    }
+
+    @Bean
+    @ConditionalOnSingleCandidate(DataSource.class) // 스프링 컨테이너에 DataSource가 딱 한개만 등록되어 있다면 그걸 사용하겠다는 의미
+    @ConditionalOnMissingBean
+    JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    @ConditionalOnSingleCandidate(DataSource.class)
+    @ConditionalOnMissingBean
+    JdbcTransactionManager jdbcTransactionManager(DataSource dataSource) {
+        return new JdbcTransactionManager(dataSource);
     }
 
 }
