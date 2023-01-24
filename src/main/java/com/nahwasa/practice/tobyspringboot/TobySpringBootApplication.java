@@ -1,11 +1,11 @@
 package com.nahwasa.practice.tobyspringboot;
 
-import com.nahwasa.practice.config.MySpringBootApplication;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@MySpringBootApplication
+@SpringBootApplication
 public class TobySpringBootApplication {
     private final JdbcTemplate jdbcTemplate;
 
