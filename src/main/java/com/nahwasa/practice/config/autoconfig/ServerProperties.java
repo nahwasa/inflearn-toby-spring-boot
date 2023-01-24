@@ -2,7 +2,7 @@ package com.nahwasa.practice.config.autoconfig;
 
 import com.nahwasa.practice.config.MyConfigurationProperties;
 
-@MyConfigurationProperties
+@MyConfigurationProperties(prefix = "server")
 public class ServerProperties {
     private String contextPath;
     private int port;

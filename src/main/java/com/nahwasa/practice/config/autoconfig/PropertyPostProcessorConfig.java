@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 
+import java.util.Map;
+
 @MyAutoConfiguration
 public class PropertyPostProcessorConfig {
     // MyConfigurationProperties 어노테이션이 붙어 있는 경우에는 프로퍼티값을 바인딩 한다.
@@ -20,7 +22,10 @@ public class PropertyPostProcessorConfig {
                 MyConfigurationProperties annotation = AnnotationUtils.findAnnotation(bean.getClass(), MyConfigurationProperties.class);
                 if (annotation == null) return bean;
 
-                return Binder.get(env).bindOrCreate("", bean.getClass());
+                Map<String, Object> attrs = AnnotationUtils.getAnnotationAttributes(annotation);
+                String prefix = (String) attrs.get("prefix");
+
+                return Binder.get(env).bindOrCreate(prefix, bean.getClass());
             }
         };
     }

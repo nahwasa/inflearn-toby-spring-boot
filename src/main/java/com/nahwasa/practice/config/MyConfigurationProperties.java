@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Component
 public @interface MyConfigurationProperties {
+    String prefix();
 }
