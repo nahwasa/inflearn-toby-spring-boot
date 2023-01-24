@@ -2,3 +2,5 @@ com.nahwasa.practice.config.autoconfig.DispatcherServletConfig
 com.nahwasa.practice.config.autoconfig.TomcatWebServerConfig
 com.nahwasa.practice.config.autoconfig.JettyWebServerConfig
 com.nahwasa.practice.config.autoconfig.UndertowWebServerConfig
+com.nahwasa.practice.config.autoconfig.PropertyPlaceholderConfig
+com.nahwasa.practice.config.autoconfig.PropertyPostProcessorConfig
